@@ -11,7 +11,7 @@ public class User {
     private String username;
     private String password;
     private String fecha;
-    private int[] followers;
+    private ArrayList<Integer> followers;
     private ArrayList<Post> publicaciones;
 
     // constructor
@@ -23,24 +23,11 @@ public class User {
         SimpleDateFormat tipo = new SimpleDateFormat("dd/MM/yyyy");
         Date tempDate = new Date();
         this.fecha = tipo.format(tempDate);
-        this.followers = new int[1];
+        this.followers = new ArrayList<>();
         this.publicaciones = new ArrayList<>();
         
     }
-    /**
-     *
-     * @return La id del usuario
-     */
-    
-    public static Integer getIdGlobal() {
-        return idGlobal;
-    }
-
-
-    public static void setIdGlobal(Integer idGlobal) {
-        User.idGlobal = idGlobal;
-    }
-
+    // setters y getters
 
     /**
      *
@@ -95,28 +82,22 @@ public class User {
     }
     /**
      *
-     * @param fecha la fecha de creacion del usuario
+     * @return followers del usuario
      */
-
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
-    }
-    /**
-     *
-     * @return los followers del usuario
-     */
-
-    public int[] getFollowers() {
+    
+    public ArrayList<Integer> getFollowers() {
         return followers;
     }
 
     /**
      *
-     * @param followers lista de followers del usuario
+     * @param followers nuevos followers del usuario
      */
-    public void setFollowers(int[] followers) {
+
+    public void setFollowers(ArrayList<Integer> followers) {
         this.followers = followers;
     }
+
     /**
      *
      * @return publicaciones del usuario
