@@ -111,12 +111,20 @@ public class Post {
     
     /**
      *
-     * @return los comentarios de la publicacion
+     * @return comments cambia los etiquetados
      */
     public ArrayList<Post> getComments() {
         return comments;
     }
-    
+
+    /**
+     *
+     * @param comments cambia los etiquetados
+     */
+    public void setComments(ArrayList<Post> comments) {
+        this.comments = comments;
+    }
+
     /**
      *
      * @return los etiquetados de la publciacion
@@ -128,12 +136,52 @@ public class Post {
     
     /**
      *
+     * @param tags cambia los etiquetados
+     */
+    public void setTags(ArrayList<Integer> tags) {
+        Tags = tags;
+    }
+
+    /**
+     *
      * @return los usuarios que han compartido la publicacion
      */
     public ArrayList<Integer> getShared() {
         return Shared;
     }
-    // methods
 
+    /**
+     *
+     * @param shared cambia la lista de los usuarios que han compartido
+     */
+    public void setShared(ArrayList<Integer> shared) {
+        Shared = shared;
+    }
+
+    // methods
+    public void addReact(React reaccion){
+        ArrayList<React> list = getReactions();
+        list.add(reaccion);
+        setReactions(list);
+    }
+
+    public void addComment(Post comentario){
+        ArrayList<Post> list = getComments();
+        list.add(comentario);
+        setComments(list);
+    }
+
+    public void addTag(Integer etiquetado){
+        ArrayList<Integer> list = getTags();
+        list.add(etiquetado);
+        setTags(list);
+        
+    }
+
+    public void addShared(Integer compartido){
+        ArrayList<Integer> list = getShared();
+        list.add(compartido);
+        setShared(list);
+    }
 
 }

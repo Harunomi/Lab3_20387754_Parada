@@ -117,6 +117,17 @@ public class User {
     
     
     // methods
+    public void addFollowers(Integer follower){
+        ArrayList<Integer> list = getFollowers();
+        list.add(follower);
+        setFollowers(list);
+    }
 
+    public void addUserPost(Post publicacion){
+        ArrayList<Post> list = getPublicaciones();
+        list.add(publicacion);
+        setPublicaciones(list);
+
+    }
 
 }
