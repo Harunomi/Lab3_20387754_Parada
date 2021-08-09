@@ -116,7 +116,7 @@ public class User {
     }
     
     
-    // methods
+    // --------------------methods-----------------------
     public void addFollowers(Integer follower){
         ArrayList<Integer> list = getFollowers();
         list.add(follower);

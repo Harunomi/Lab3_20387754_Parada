@@ -7,7 +7,7 @@ public class Post {
     // attributes
     private static Integer idGlobal = 0;
     private Integer id;
-    private String tipo;
+    private String tipo; // tipo de publicación (“photo”, “video”, “url”, “text”, “audio”)
     private String texto;
     private String fecha;
     private ArrayList<React> reactions; 
@@ -16,6 +16,21 @@ public class Post {
     private ArrayList<Integer> Shared;
 
     // constructor
+    public Post(String tipo, String texto){
+        idGlobal = idGlobal + 1;
+        this.id = idGlobal;
+        this.tipo = tipo;
+        this.texto = texto;
+        SimpleDateFormat tipoFecha = new SimpleDateFormat("dd/MM/yyyy");
+        Date tempDate = new Date();
+        this.fecha = tipoFecha.format(tempDate);
+        this.reactions = new ArrayList<>();
+        this.comments = new ArrayList<>();
+        ArrayList<Integer> empty = new ArrayList<>();
+        this.Tags = empty;
+        this.Shared = new ArrayList<>();
+    }
+   
     public Post(String tipo, String texto,ArrayList<Integer> Tags){
         idGlobal = idGlobal + 1;
         this.id = idGlobal;
@@ -28,10 +43,9 @@ public class Post {
         this.comments = new ArrayList<>();
         this.Tags = Tags;
         this.Shared = new ArrayList<>();
-
-
-
     }
+
+
     // getters y setters
     
     /**

@@ -24,6 +24,31 @@ public class Socialnetwork {
         this.reacts = new ArrayList<>();
         this.UsuarioOnline = 0;
 
+        // Se crea nuevos usuarios
+        User user1 = new User("Katsugo","uwu123");
+        User user2 = new User("Harunomi","password1");
+        User user3 = new User("Spica","Cybele");
+
+        // creo las publicaciones
+        Post post1 = new Post("text","Explorando la nueva red social");
+        Post post2 = new Post("photo","publicacion.jpeg");
+        Post post3 = new Post("audio","cover.mp3");
+
+        // agrego las publicaciones a los usuarios
+        user2.addUserPost(post1);
+        user2.addUserPost(post2);
+        user1.addUserPost(post3);
+
+        // agrego los usuarios y publicacion a la red social
+        usuarios.add(user1);
+        usuarios.add(user2);
+        usuarios.add(user3);
+
+        publicaciones.add(post1);
+        publicaciones.add(post2);
+        publicaciones.add(post3);
+
+
     }
     // getters y setters
 
@@ -124,5 +149,24 @@ public class Socialnetwork {
     }
     
 
+    // methods
+    public void addUsuario(User usuario){
+        ArrayList<User> list = getUsuarios();
+        list.add(usuario);
+        setUsuarios(list);
+        
+    }
+    
+    public void addPostRS(Post publicacion){
+        ArrayList<Post> list = getPublicaciones();
+        list.add(publicacion);
+        setPublicaciones(list);
+    }
+
+    public void addReactRS(React reaccion){
+        ArrayList<React> list = getReacts();
+        list.add(reaccion);
+        setReacts(list);
+    }
 
 }
