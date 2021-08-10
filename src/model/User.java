@@ -130,4 +130,17 @@ public class User {
 
     }
 
+    public User id_to_user(ArrayList<User> usuarios, Integer id){
+        User retorno;
+        for (int i = 0; i < usuarios.size(); i++) {
+            if(usuarios.get(i).getId() == id){
+                retorno = usuarios.get(i);
+                return retorno;
+            }
+        }
+        System.out.print("El usuario con esta id no existe");
+        return;
+
+    }
+
 }
