@@ -1,4 +1,5 @@
 package model;
+
 import java.util.Date;
 import java.util.ArrayList;
 import java.text.SimpleDateFormat;
@@ -12,7 +13,7 @@ public class Socialnetwork {
     private ArrayList<User> usuarios;
     private ArrayList<Post> publicaciones;
     private ArrayList<React> reacts;
-    private Integer UsuarioOnline;
+    private User UsuarioOnline;
 
     Socialnetwork(String nombre){
         this.nombre = nombre;
@@ -22,7 +23,6 @@ public class Socialnetwork {
         this.usuarios = new ArrayList<>();
         this.publicaciones = new ArrayList<>();
         this.reacts = new ArrayList<>();
-        this.UsuarioOnline = 0;
 
         // Se crea nuevos usuarios
         User user1 = new User("Katsugo","uwu123");
@@ -136,7 +136,7 @@ public class Socialnetwork {
      *
      * @return el usuario online
      */
-    public Integer getUsuarioOnline() {
+    public User getUsuarioOnline() {
         return UsuarioOnline;
     }
 
@@ -144,7 +144,7 @@ public class Socialnetwork {
      *
      * @param usuarioOnline cambia el usuario online en la red social
      */
-    public void setUsuarioOnline(Integer usuarioOnline) {
+    public void setUsuarioOnline(User usuarioOnline) {
         UsuarioOnline = usuarioOnline;
     }
     
@@ -168,5 +168,7 @@ public class Socialnetwork {
         list.add(reaccion);
         setReacts(list);
     }
+
+    
 
 }
