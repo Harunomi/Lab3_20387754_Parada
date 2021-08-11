@@ -129,7 +129,7 @@ public class User {
         setPublicaciones(list);
 
     }
-
+    /*
     public User id_to_user(ArrayList<User> usuarios, Integer id){
         User retorno;
         for (int i = 0; i < usuarios.size(); i++) {
@@ -141,6 +141,6 @@ public class User {
         System.out.print("El usuario con esta id no existe");
         return;
 
-    }
+    }*/
 
 }

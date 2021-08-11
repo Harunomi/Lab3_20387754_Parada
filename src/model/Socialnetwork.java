@@ -14,8 +14,9 @@ public class Socialnetwork {
     private ArrayList<Post> publicaciones;
     private ArrayList<React> reacts;
     private User UsuarioOnline;
+    private boolean online;
 
-    Socialnetwork(String nombre){
+    public Socialnetwork(String nombre){
         this.nombre = nombre;
         SimpleDateFormat tipo = new SimpleDateFormat("dd/MM/yyyy");
         Date tempDate = new Date();
@@ -23,6 +24,7 @@ public class Socialnetwork {
         this.usuarios = new ArrayList<>();
         this.publicaciones = new ArrayList<>();
         this.reacts = new ArrayList<>();
+        this.online = false;
 
         // Se crea nuevos usuarios
         User user1 = new User("Katsugo","uwu123");
@@ -148,6 +150,22 @@ public class Socialnetwork {
         UsuarioOnline = usuarioOnline;
     }
     
+    
+    /**
+     *
+     * @return true or false
+     */
+    public boolean isOnline() {
+        return online;
+    }
+
+    /**
+     *
+     * @param online true or false si esta online
+     */
+    public void setOnline(boolean online) {
+        this.online = online;
+    }
 
     // methods
     public void addUsuario(User usuario){

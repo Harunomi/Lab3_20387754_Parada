@@ -25,11 +25,7 @@ public class Controller {
 
     public boolean estaConectado(){
         Socialnetwork actual = getSocialnetwork();
-        if(actual.getUsuarioOnline().getId() > 0){
-            return true;
-        }else{
-            return false;
-        }
+        return actual.isOnline();
     }
     
     // register
@@ -54,8 +50,30 @@ public class Controller {
             // buscamos al usuario
             if (redSocial.getUsuarios().get(i).getUsername().equals(username) && redSocial.getUsuarios().get(i).getPassword().equals(password)){
                 // Establecer al usuario como conectado
+                redSocial.setUsuarioOnline(redSocial.getUsuarios().get(i));
+                redSocial.setOnline(true);
+                return;
             }
         }
+        System.out.println("El usuario " + username + "no existe o la contrasena ingresada es incorrecta");
+    }
+
+    public void logOut(){
+        Socialnetwork redSocial = getSocialnetwork();
+        redSocial.setOnline(false);
 
     }
+
+    public void post(String type, String content){
+        Socialnetwork redSocial = getSocialnetwork();
+        // creamos la publicacion
+        Post newPost = new Post(type,content);
+        // agregamos la pregunta a la red social
+        redSocial.addPostRS(newPost);
+        // se agrega la publicacion a la lista de publicaciones del usuario
+        redSocial.getUsuarioOnline().getPublicaciones().add(newPost);
+        System.out.println("Post protocol completed succesfully");
+
+    }
+
 }

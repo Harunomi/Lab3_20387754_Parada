@@ -35,7 +35,7 @@ public class Menu {
         String password;
         Controller controlador = getControlador();
         while(!salirMenu){
-            if(controlador.estaConectado() != false){
+            if(controlador.estaConectado() == false){
                 System.out.println("### Bienvenido a Tik Tok ###");
                 System.out.println("Escoja la opción que desea realizar: ");
                 System.out.println("1. LOGEARSE");
@@ -51,17 +51,16 @@ public class Menu {
                             System.out.println("Ingrese el nombre de usuario:");
                             input.nextLine();
                             username = input.nextLine();
-                            System.out.println("Ingrese la contrasena para el usuario" + username);
-                            input.nextLine();
+                            System.out.println("Ingrese la contrasena para el usuario " + username);
                             password = input.nextLine();
                             controlador.login(username,password);
                             break;
                         case 2:
-                            System.out.println("Su opcion fue la numero 2   : registrarse en la red social");
-                            System.out.println("Ingrese el nombre de usuario:");
+                            System.out.println("Su opcion fue la numero 2: registrarse en la red social");
+                            System.out.println("Ingrese el nombre de usuario: ");
                             input.nextLine();
                             username = input.nextLine();
-                            input.nextLine();
+                            System.out.println("Ingrese una contrasena para crear sesion: ");
                             password = input.nextLine();
                             controlador.register(username,password);
                             break;
@@ -95,6 +94,7 @@ public class Menu {
                     eleccion = input.nextInt();
                     switch(eleccion){
                         case 1: // post
+                            
                             break;
                         case 2: // follow
                             break;
