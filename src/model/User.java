@@ -11,7 +11,7 @@ public class User {
     private String username;
     private String password;
     private String fecha;
-    private ArrayList<Integer> followers;
+    private ArrayList<User> followers;
     private ArrayList<Post> publicaciones;
 
     // constructor
@@ -85,7 +85,7 @@ public class User {
      * @return followers del usuario
      */
     
-    public ArrayList<Integer> getFollowers() {
+    public ArrayList<User> getFollowers() {
         return followers;
     }
 
@@ -94,7 +94,7 @@ public class User {
      * @param followers nuevos followers del usuario
      */
 
-    public void setFollowers(ArrayList<Integer> followers) {
+    public void setFollowers(ArrayList<User> followers) {
         this.followers = followers;
     }
 
@@ -117,8 +117,8 @@ public class User {
     
     
     // --------------------methods-----------------------
-    public void addFollowers(Integer follower){
-        ArrayList<Integer> list = getFollowers();
+    public void addFollowers(User follower){
+        ArrayList<User> list = getFollowers();
         list.add(follower);
         setFollowers(list);
     }

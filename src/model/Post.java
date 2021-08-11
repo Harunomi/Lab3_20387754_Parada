@@ -10,6 +10,7 @@ public class Post {
     private String tipo; // tipo de publicación (“photo”, “video”, “url”, “text”, “audio”)
     private String texto;
     private String fecha;
+    private User autor;
     private ArrayList<React> reactions; 
     private ArrayList<Post> comments;
     private ArrayList<Integer> Tags;
@@ -115,6 +116,14 @@ public class Post {
         return reactions;
     }
     
+    public User getAutor() {
+        return autor;
+    }
+
+    public void setAutor(User autor) {
+        this.autor = autor;
+    }
+
     /**
      *
      * @param reactions cambia las reacciones de la publicacion

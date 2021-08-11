@@ -68,6 +68,7 @@ public class Controller {
         Socialnetwork redSocial = getSocialnetwork();
         // creamos la publicacion
         Post newPost = new Post(type,content);
+        newPost.setAutor(redSocial.getUsuarioOnline());
         // agregamos la pregunta a la red social
         redSocial.addPostRS(newPost);
         // se agrega la publicacion a la lista de publicaciones del usuario
@@ -75,6 +76,24 @@ public class Controller {
         System.out.println("Post protocol completed succesfully");
 
     }
+
+    public void follow(String username){
+        Socialnetwork redSocial = getSocialnetwork();
+        // revisamos el caso en que el usuario se quiera seguir a si mismo
+        if (redSocial.getUsuarioOnline().getUsername().equals(username)){
+            System.out.println("Lo sentimos, pero el usuario no se puede seguir a si mismo!");
+            return;
+        }
+        for (int i = 0; i < redSocial.getUsuarios().size(); i++) {
+            if (redSocial.getUsuarios().get(i).getUsername().equals(username)) {
+                redSocial.getUsuarios().get(i).addFollowers(redSocial.getUsuarioOnline());
+                return;
+            }
+        }
+        System.out.println("El usuario ingresado no existe!");
+        
+
+    }   
 
 
 

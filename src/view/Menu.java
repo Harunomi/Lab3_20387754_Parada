@@ -93,6 +93,7 @@ public class Menu {
                 System.out.println("5. Comentar una publicacion");
                 System.out.println("6. Agregar una reaccion a una publicacion");
                 System.out.println("7. Ver publicaciones virales");
+                System.out.println("8. Cerrar sesion en la red social");
 
                 try{
                     System.out.println("Ingrese una de las opciones anteriores: ");
@@ -107,6 +108,10 @@ public class Menu {
                             controlador.post(tipoPost, contenidoPost);
                             break;
                         case 2: // follow
+                            System.out.println("Ingrese el nombre del usuario el cual desea seguir");
+                            input.nextLine();
+                            username = input.nextLine();
+                            controlador.follow(username);
                             break;
                         case 3: // share
                             break;
