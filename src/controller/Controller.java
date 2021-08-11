@@ -76,4 +76,21 @@ public class Controller {
 
     }
 
+
+
+    public void printearRS(){
+        Socialnetwork redSocial = getSocialnetwork();
+        System.out.println("Nombre de la red social: " + redSocial.getNombre());
+        System.out.println("Fecha de creacion de la red social: "+  redSocial.getFecha());
+        System.out.println("         Miembros de la red social: ");
+        for (int i = 0; i < redSocial.getUsuarios().size(); i++) {
+            System.out.println("ID: "+redSocial.getUsuarios().get(i).getId()+" Nombre de usuario: "+ redSocial.getUsuarios().get(i).getUsername());
+        }
+        System.out.println("         Publicaciones de la red social: ");;
+        for (int i = 0; i < redSocial.getPublicaciones().size(); i++) {
+            System.out.println("ID: "+redSocial.getPublicaciones().get(i).getId() + " Tipo de publciacion: "+redSocial.getPublicaciones().get(i).getTipo() + " Contenido de la publciacion: "+ redSocial.getPublicaciones().get(i).getTexto());
+        }
+
+    }
+
 }

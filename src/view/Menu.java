@@ -40,7 +40,8 @@ public class Menu {
                 System.out.println("Escoja la opción que desea realizar: ");
                 System.out.println("1. LOGEARSE");
                 System.out.println("2. REGISTRARSE");
-                System.out.println("3. SALIR");
+                System.out.println("3. VER RED SOCIAL");
+                System.out.println("4. SALIR");
 
                 try {
                     System.out.println("Introduzca su eleccion: ");
@@ -65,6 +66,10 @@ public class Menu {
                             controlador.register(username,password);
                             break;
                         case 3:
+                            System.out.println("Su opcion fue la numero 3: Ver el contenido de la red social");
+                            controlador.printearRS();
+                            break;
+                        case 4:
                             System.out.println("Gracias por utilizar esta red social");
                             salirMenu = true;
                             break;
@@ -94,19 +99,28 @@ public class Menu {
                     eleccion = input.nextInt();
                     switch(eleccion){
                         case 1: // post
-                            
+                            System.out.println("Ingrese el tipo de publicacion que desea realizar: ");
+                            input.nextLine();
+                            String tipoPost = input.nextLine();
+                            System.out.println("Ingrese el contenido de la publicacion: ");
+                            String contenidoPost = input.nextLine();
+                            controlador.post(tipoPost, contenidoPost);
                             break;
                         case 2: // follow
                             break;
                         case 3: // share
                             break;
-                        case 4: // visualize
+                        case 4: // visualize / ver perfil
                             break;
                         case 5: // comment
                             break;
                         case 6: // react (multiples reacciones, no solo un like)
                             break;
                         case 7: // isViral
+                            break;
+                        case 8: // logout
+                            controlador.logOut();
+                            break;
 
                         default:
                             System.out.println("Seleccione nuevamente una de las opciones anteriores");
