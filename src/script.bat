@@ -8,4 +8,4 @@ javac model/*.java
 
 javac view/*.java
 
-javac main/Main 
+java main/Main 

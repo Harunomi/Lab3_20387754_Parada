@@ -1,5 +1,6 @@
 package view;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import controller.Controller;
@@ -67,11 +68,12 @@ public class Menu {
                             break;
                         case 3:
                             System.out.println("Su opcion fue la numero 3: Ver el contenido de la red social");
-                            controlador.printearRS();
+                            controlador.visualize();
                             break;
                         case 4:
                             System.out.println("Gracias por utilizar esta red social");
                             salirMenu = true;
+                            input.close();
                             break;
                         default:
                             System.out.println("Seleccione nuevamente una de las opciones anteriores")    ;
@@ -114,12 +116,36 @@ public class Menu {
                             controlador.follow(username);
                             break;
                         case 3: // share
+                            System.out.println("Ingrese la ID de la publicacion que desea compartir");
+                            Integer idACompartir = input.nextInt();
+                            ArrayList<String> listaTags = new ArrayList<>();                            
+                            System.out.println("Ingrese la cantidad de etiquetados que desea que tenga la pubblicacion compartida:");
+                            int cantTags = input.nextInt();
+                            String tag;
+                            System.out.println("Cantidad de etiquetados seleccionada: "+cantTags);
+                            for (int i = 0; i < cantTags; i++) {
+                                System.out.println("Ingrese el etiquetado numero "+ (i+1));
+                                input.nextLine();
+                                tag = input.nextLine();
+                                listaTags.add(tag);
+                                
+                            }
+                            // discriminamos el caso en que haya etiquetados o no
+                            if (cantTags == 0) {
+                                controlador.share(idACompartir);
+                            }else{
+                                controlador.share(idACompartir,listaTags);
+                            }
+                            
                             break;
                         case 4: // visualize / ver perfil
+                            controlador.visualize();
                             break;
                         case 5: // comment
+                            
                             break;
                         case 6: // react (multiples reacciones, no solo un like)
+                            
                             break;
                         case 7: // isViral
                             break;

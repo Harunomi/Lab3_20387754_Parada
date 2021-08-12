@@ -1,4 +1,6 @@
 package controller;
+import java.util.ArrayList;
+
 import model.*;
 
 public class Controller {
@@ -77,6 +79,33 @@ public class Controller {
 
     }
 
+    public void post(String type, String content,ArrayList<String> listaTags){
+        Socialnetwork redSocial = getSocialnetwork();
+        Integer counter = 0;
+        // verificamos que los etiquetados existan en la red social
+        for (int i = 0; i < listaTags.size(); i++) {
+            for (int j = 0; j < redSocial.getUsuarios().size(); j++) {
+                if (redSocial.getUsuarios().get(j).getUsername().equals(listaTags.get(i))) {
+                    counter++;
+                }
+            }
+        }
+        // comprobamos que todos los usuarios etiquetados existan en la red social
+        if (counter!=listaTags.size()) {
+            System.out.println("Uno o mas de los usuarios etiquetados no existe, intentelo nuevamente");
+            return;
+        }
+        // creamos la publicacion
+        Post newPost = new Post(type,content,listaTags);
+        newPost.setAutor(redSocial.getUsuarioOnline());
+        // agregamos la pregunta a la red social
+        redSocial.addPostRS(newPost);
+        // se agrega la publicacion a la lista de publicaciones del usuario
+        redSocial.getUsuarioOnline().getPublicaciones().add(newPost);
+        System.out.println("Post protocol completed succesfully");
+
+    }
+
     public void follow(String username){
         Socialnetwork redSocial = getSocialnetwork();
         // revisamos el caso en que el usuario se quiera seguir a si mismo
@@ -87,29 +116,78 @@ public class Controller {
         for (int i = 0; i < redSocial.getUsuarios().size(); i++) {
             if (redSocial.getUsuarios().get(i).getUsername().equals(username)) {
                 redSocial.getUsuarios().get(i).addFollowers(redSocial.getUsuarioOnline());
+                System.out.println("El usuario "+username+" ha sido seguido con exito!");
                 return;
             }
         }
         System.out.println("El usuario ingresado no existe!");
-        
 
-    }   
-
-
-
-    public void printearRS(){
-        Socialnetwork redSocial = getSocialnetwork();
-        System.out.println("Nombre de la red social: " + redSocial.getNombre());
-        System.out.println("Fecha de creacion de la red social: "+  redSocial.getFecha());
-        System.out.println("         Miembros de la red social: ");
-        for (int i = 0; i < redSocial.getUsuarios().size(); i++) {
-            System.out.println("ID: "+redSocial.getUsuarios().get(i).getId()+" Nombre de usuario: "+ redSocial.getUsuarios().get(i).getUsername());
-        }
-        System.out.println("         Publicaciones de la red social: ");;
-        for (int i = 0; i < redSocial.getPublicaciones().size(); i++) {
-            System.out.println("ID: "+redSocial.getPublicaciones().get(i).getId() + " Tipo de publciacion: "+redSocial.getPublicaciones().get(i).getTipo() + " Contenido de la publciacion: "+ redSocial.getPublicaciones().get(i).getTexto());
-        }
 
     }
+    // caso en que el usuario no quiera etiquetar a nadie
+    public void share(Integer id){
+        Socialnetwork redSocial = getSocialnetwork();
+        // buscamos si la publicacion existe
+        for (int i = 0; i < redSocial.getPublicaciones().size(); i++) {
+            if (redSocial.getPublicaciones().get(i).getId() == id) {
+                // encontramos la publicacion, por lo que se copia
+                Post sharedPost = new Post(redSocial.getPublicaciones().get(i).getTipo(),redSocial.getPublicaciones().get(i).getTexto());
+                sharedPost.setAutor(redSocial.getUsuarioOnline());
+                // a la publicacion original le agrego el usuario que la compartio
+                redSocial.getPublicaciones().get(i).addShared(redSocial.getUsuarioOnline());
+                // agrego la nueva publciacion a la red social y al usuario en cuestion
+                redSocial.addPostRS(sharedPost);
+                redSocial.getUsuarioOnline().addUserPost(sharedPost);
+                System.out.println("Publicacion compartida con exito!");
+                return;
+            }
+        }
+        System.out.println("La publicacion con la ID "+id+" no fue encontrada en la red social :(");
+    }
+
+    
+
+    // caso en que el usuario haya etiquetado a personas
+    public void share(Integer id,ArrayList<String> listaTags){
+        Socialnetwork redSocial = getSocialnetwork();
+        Integer counter = 0;
+        // verificamos que los etiquetados existan en la red social
+        for (int i = 0; i < listaTags.size(); i++) {
+            for (int j = 0; j < redSocial.getUsuarios().size(); j++) {
+                if (redSocial.getUsuarios().get(j).getUsername().equals(listaTags.get(i))) {
+                    counter++;
+                }
+            }
+        }
+        // comprobamos que todos los usuarios etiquetados existan en la red social
+        if (counter!=listaTags.size()) {
+            System.out.println("Uno o mas de los usuarios etiquetados no existe, intentelo nuevamente");
+            return;
+        }
+        // buscamos si la publicacion existe
+        for (int i = 0; i < redSocial.getPublicaciones().size(); i++) {
+            if (redSocial.getPublicaciones().get(i).getId() == id) {
+                // encontramos la publicacion, por lo que se copia
+                Post sharedPost = new Post(redSocial.getPublicaciones().get(i).getTipo(),redSocial.getPublicaciones().get(i).getTexto(),listaTags);
+                sharedPost.setAutor(redSocial.getUsuarioOnline());
+                // a la publicacion original le agrego el usuario que la compartio
+                redSocial.getPublicaciones().get(i).addShared(redSocial.getUsuarioOnline());
+                // agrego la nueva publciacion a la red social y al usuario en cuestion
+                redSocial.addPostRS(sharedPost);
+                redSocial.getUsuarioOnline().addUserPost(sharedPost);
+                System.out.println("Publicacion compartida con exito!");
+                return;
+            }
+        }
+        System.out.println("La publicacion con la ID "+id+" no fue encontrada en la red social :(");
+    }
+
+    public void visualize(){
+        Socialnetwork redSocial = getSocialnetwork();
+        String salida = redSocial.SocialNetworkToString();
+        System.out.println(salida);
+    }
+
+    
 
 }

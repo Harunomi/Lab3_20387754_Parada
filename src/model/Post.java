@@ -7,14 +7,14 @@ public class Post {
     // attributes
     private static Integer idGlobal = 0;
     private Integer id;
-    private String tipo; // tipo de publicación (“photo”, “video”, “url”, “text”, “audio”)
+    private String tipo; 
     private String texto;
     private String fecha;
     private User autor;
     private ArrayList<React> reactions; 
     private ArrayList<Post> comments;
-    private ArrayList<Integer> Tags;
-    private ArrayList<Integer> Shared;
+    private ArrayList<String> Tags;
+    private ArrayList<User> Shared;
 
     // constructor
     public Post(String tipo, String texto){
@@ -27,12 +27,12 @@ public class Post {
         this.fecha = tipoFecha.format(tempDate);
         this.reactions = new ArrayList<>();
         this.comments = new ArrayList<>();
-        ArrayList<Integer> empty = new ArrayList<>();
+        ArrayList<String> empty = new ArrayList<>();
         this.Tags = empty;
         this.Shared = new ArrayList<>();
     }
    
-    public Post(String tipo, String texto,ArrayList<Integer> Tags){
+    public Post(String tipo, String texto,ArrayList<String> Tags){
         idGlobal = idGlobal + 1;
         this.id = idGlobal;
         this.tipo = tipo;
@@ -153,7 +153,7 @@ public class Post {
      * @return los etiquetados de la publciacion
      */
 
-    public ArrayList<Integer> getTags() {
+    public ArrayList<String> getTags() {
         return Tags;
     }
     
@@ -161,7 +161,7 @@ public class Post {
      *
      * @param tags cambia los etiquetados
      */
-    public void setTags(ArrayList<Integer> tags) {
+    public void setTags(ArrayList<String> tags) {
         Tags = tags;
     }
 
@@ -169,7 +169,7 @@ public class Post {
      *
      * @return los usuarios que han compartido la publicacion
      */
-    public ArrayList<Integer> getShared() {
+    public ArrayList<User> getShared() {
         return Shared;
     }
 
@@ -177,7 +177,7 @@ public class Post {
      *
      * @param shared cambia la lista de los usuarios que han compartido
      */
-    public void setShared(ArrayList<Integer> shared) {
+    public void setShared(ArrayList<User> shared) {
         Shared = shared;
     }
 
@@ -194,17 +194,18 @@ public class Post {
         setComments(list);
     }
 
-    public void addTag(Integer etiquetado){
-        ArrayList<Integer> list = getTags();
+    public void addTag(String etiquetado){
+        ArrayList<String> list = getTags();
         list.add(etiquetado);
         setTags(list);
         
     }
 
-    public void addShared(Integer compartido){
-        ArrayList<Integer> list = getShared();
+    public void addShared(User compartido){
+        ArrayList<User> list = getShared();
         list.add(compartido);
         setShared(list);
     }
 
+    
 }
