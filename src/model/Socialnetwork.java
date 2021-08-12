@@ -30,25 +30,30 @@ public class Socialnetwork {
         User user1 = new User("Katsugo","uwu123");
         User user2 = new User("Harunomi","password1");
         User user3 = new User("Spica","Cybele");
+        User user4 = new User("uNable","nomehackeen");
 
         // creo las publicaciones
         Post post1 = new Post("text","Explorando la nueva red social");
         Post post2 = new Post("photo","publicacion.jpeg");
         Post post3 = new Post("audio","cover.mp3");
+        Post post4 = new Post("photo","tremendomapita.png");
 
         // agrego las publicaciones a los usuarios
         user2.addUserPost(post1);
         user2.addUserPost(post2);
         user1.addUserPost(post3);
+        user4.addUserPost(post4);
 
         // agrego los usuarios y publicacion a la red social
         usuarios.add(user1);
         usuarios.add(user2);
         usuarios.add(user3);
+        usuarios.add(user4);
 
         publicaciones.add(post1);
         publicaciones.add(post2);
         publicaciones.add(post3);
+        publicaciones.add(post4);
 
 
     }
@@ -268,7 +273,7 @@ public class Socialnetwork {
                     retorno = retorno + "Publicacion creada con fecha: " + getUsuarios().get(k).getPublicaciones().get(i).getFecha() + "\n";
                     retorno = retorno + "Tipo de publicacion: " + getUsuarios().get(k).getPublicaciones().get(i).getTipo() + "\n";
                     retorno = retorno + "Contenido de la publicacion: " + getUsuarios().get(k).getPublicaciones().get(i).getTexto() + "\n";
-                    retorno = retorno + "La publicacion cuenta con " + getUsuarios().get(k).getPublicaciones().get(i).getReactions().size() + "\n";
+                    retorno = retorno + "La publicacion cuenta con " + getUsuarios().get(k).getPublicaciones().get(i).getReactions().size() + " reacciones\n";
                     // reacciones de la publicacion
                     for (int j = 0; j < getUsuarios().get(k).getPublicaciones().get(i).getReactions().size(); j++) {
                         retorno = retorno + "$$$$ Reaccion numero " + (j+1) + " $$$$\n";
@@ -280,9 +285,9 @@ public class Socialnetwork {
                     retorno = retorno + "La publicacion actual tiene " + getUsuarios().get(k).getPublicaciones().get(i).getComments().size() + " comentarios\n";
                     // comentarios de la publicacion
                     for (int j = 0; j < getUsuarios().get(k).getPublicaciones().get(i).getComments().size(); j++) {
-                        retorno = retorno + "     ^^^Comentario numero " + (j+1)+ " ^^^\n";
+                        retorno = retorno + "     ^^^ Comentario numero " + (j+1)+ " ^^^\n";
                         retorno = retorno + "Fecha de creacion del comentario: " + getUsuarios().get(k).getPublicaciones().get(i).getComments().get(j).getFecha() + "\n";
-                        retorno = retorno + "Autor del comentario: " + getUsuarios().get(k).getPublicaciones().get(i).getComments().get(j).getAutor() + "\n";
+                        retorno = retorno + "Autor del comentario: " + getUsuarios().get(k).getPublicaciones().get(i).getComments().get(j).getAutor().getUsername() + "\n";
                         retorno = retorno + "Tipo de comentario: " + getUsuarios().get(k).getPublicaciones().get(i).getComments().get(j).getTipo() + "\n";
                         retorno = retorno + "Contenido del comentario: " + getUsuarios().get(k).getPublicaciones().get(i).getComments().get(j).getTexto() + "\n";
                         retorno = retorno + "El comentario cuenta con otros: " + getUsuarios().get(k).getPublicaciones().get(i).getComments().get(j).getComments().size() + "comentarios\n";
@@ -322,9 +327,9 @@ public class Socialnetwork {
                 retorno = retorno + "La publicacion actual tiene " + getPublicaciones().get(k).getComments().size() + " comentarios\n";
                 // comentarios de la publicacion
                 for (int j = 0; j < getPublicaciones().get(k).getComments().size(); j++) {
-                    retorno = retorno + "     ^^^Comentario numero " + (j+1)+ " ^^^\n";
+                    retorno = retorno + "     ^^^ Comentario numero " + (j+1)+ " ^^^\n";
                     retorno = retorno + "Fecha de creacion del comentario: " + getPublicaciones().get(k).getComments().get(j).getFecha() + "\n";
-                    retorno = retorno + "Autor del comentario: " + getPublicaciones().get(k).getComments().get(j).getAutor() + "\n";
+                    retorno = retorno + "Autor del comentario: " + getPublicaciones().get(k).getComments().get(j).getAutor().getUsername() + "\n";
                     retorno = retorno + "Tipo de comentario: " + getPublicaciones().get(k).getComments().get(j).getTipo() + "\n";
                     retorno = retorno + "Contenido del comentario: " + getPublicaciones().get(k).getComments().get(j).getTexto() + "\n";
                     retorno = retorno + "El comentario cuenta con otros: " + getPublicaciones().get(k).getComments().get(j).getComments().size() + " comentarios\n";
@@ -333,7 +338,7 @@ public class Socialnetwork {
                     retorno = retorno + "Ha sido compartido: " + getPublicaciones().get(k).getComments().get(j).getShared().size() + " veces\n";
                 }
                 // Etiquetados de la publicacion
-                retorno = retorno + "\nLa publicacion tiene como etiquetados a: ";
+                retorno = retorno + "\n  La publicacion tiene como etiquetados a: ";
                 for (int j = 0; j < getPublicaciones().get(k).getTags().size(); j++) {
                     retorno = retorno + getPublicaciones().get(k).getTags().get(j) + " ";
                 }

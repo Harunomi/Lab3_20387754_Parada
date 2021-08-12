@@ -188,6 +188,33 @@ public class Controller {
         System.out.println(salida);
     }
 
-    
+    public void comment(Integer id, String texto){
+        Socialnetwork redSocial = getSocialnetwork();
+        for (int i = 0; i < redSocial.getPublicaciones().size(); i++) {
+            if (redSocial.getPublicaciones().get(i).getId() == id) {
+                // los comentarios son siempre del tipo text
+                Post comentario = new Post("text", texto);
+                comentario.setAutor(redSocial.getUsuarioOnline());
+                redSocial.getPublicaciones().get(i).addComment(comentario);
+                redSocial.getUsuarioOnline().addUserPost(comentario);
+                System.out.println("\nComentario realizado con exito!");
+                return;
+            }
+        }
+        System.out.println("La id de la publicacion o comentario ingresada no existen en la red social :(\n");
+
+    }
+
+    public void react(Integer id,String tipo, String texto){
+        Socialnetwork redSocial = getSocialnetwork();
+        for (int i = 0; i < redSocial.getPublicaciones().size(); i++) {
+            if (redSocial.getPublicaciones().get(i).getId() == id) {
+                React reaccion = new React(redSocial.getUsuarioOnline().getUsername(),texto, tipo);
+                redSocial.getPublicaciones().get(i).addReact(reaccion);
+                redSocial.addReactRS(reaccion);
+                System.out.println("Reaccion realizada con exito!");
+            }
+        }
+    }
 
 }

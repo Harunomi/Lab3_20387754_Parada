@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import controller.Controller;
-import model.*;
 
 public class Menu {
     // attributes
@@ -94,8 +93,7 @@ public class Menu {
                 System.out.println("4. Ver su perfil");
                 System.out.println("5. Comentar una publicacion");
                 System.out.println("6. Agregar una reaccion a una publicacion");
-                System.out.println("7. Ver publicaciones virales");
-                System.out.println("8. Cerrar sesion en la red social");
+                System.out.println("7. Cerrar sesion en la red social");
 
                 try{
                     System.out.println("Ingrese una de las opciones anteriores: ");
@@ -142,14 +140,26 @@ public class Menu {
                             controlador.visualize();
                             break;
                         case 5: // comment
-                            
+                            System.out.println("Ingrese la ID de la publicacion o comentario la cual desea comentar:");
+                            input.nextLine();
+                            Integer idComentario = input.nextInt();
+                            System.out.println("Ingrese el contenido del comentario:");
+                            input.nextLine();
+                            String contenidoComentario = input.nextLine();
+                            controlador.comment(idComentario, contenidoComentario);
                             break;
                         case 6: // react (multiples reacciones, no solo un like)
-                            
+                            System.out.println("Ingrese la ID de la publicacion o comentario la cual desea agregar una reaccion");
+                            input.nextLine();
+                            Integer idReaccion = input.nextInt();
+                            System.out.println("Ingrese el tipo de reaccion (puede ser del tipo: like, haha, angry, sad, love)");
+                            input.nextLine();
+                            String tipoReaccion = input.nextLine();
+                            System.out.println("Ingrese el texto que desea que lleve la reaccion: ");
+                            String textoReaccion = input.nextLine();
+                            controlador.react(idReaccion,tipoReaccion,textoReaccion);
                             break;
-                        case 7: // isViral
-                            break;
-                        case 8: // logout
+                        case 7: // logout
                             controlador.logOut();
                             break;
 

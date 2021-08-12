@@ -8,9 +8,9 @@ public class React {
     private String autor;
     private String fecha;
     private String contenido;
-    private Integer tipo;
+    private String tipo;
 
-    public React(String autor, String contenido, Integer tipo){
+    public React(String autor, String contenido, String tipo){
         idGlobal = idGlobal + 0;
         this.id = idGlobal;
         this.autor = autor;
@@ -59,7 +59,7 @@ public class React {
      *
      * @return el tipo de reaccion
      */
-    public Integer getTipo() {
+    public String getTipo() {
         return tipo;
     }
 
