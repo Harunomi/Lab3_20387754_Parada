@@ -26,7 +26,7 @@ public class Menu {
     }
     
     // methods
-
+    
     public void ejecutarMenu(){
         Scanner input = new Scanner(System.in);
         boolean salirMenu = false;
@@ -37,12 +37,12 @@ public class Menu {
         while(!salirMenu){
             if(controlador.estaConectado() == false){
                 System.out.println("### Bienvenido a Tik Tok ###");
-                System.out.println("Escoja la opción que desea realizar: ");
+                System.out.println("Escoja la opcion que desea realizar: ");
                 System.out.println("1. LOGEARSE");
                 System.out.println("2. REGISTRARSE");
                 System.out.println("3. VER RED SOCIAL");
-                System.out.println("4. SALIR");
-
+                System.out.println("4. IS VIRAL?");
+                System.out.println("5. SALIR");
                 try {
                     System.out.println("Introduzca su eleccion: ");
                     eleccion = input.nextInt();
@@ -70,6 +70,20 @@ public class Menu {
                             controlador.visualize();
                             break;
                         case 4:
+                            System.out.println("Ingrese la cantidad de publicaciones que desea verificar:");
+                            ArrayList<Integer> listaViral = new ArrayList<>();
+                            input.nextLine();
+                            Integer cantViral = input.nextInt();
+                            for (int i = 0; i < cantViral; i++) {
+                                System.out.println("Ingrese el ID de la publicacion numero " + (i+1));
+                                Integer idViral = input.nextInt();
+                                listaViral.add(idViral);
+                            }
+                            System.out.println("Ingrese la cantidad de compartidas minima de compartidas por publicacion");    
+                            Integer variableK = input.nextInt();
+                            controlador.isViral(listaViral,variableK);
+                            break;
+                        case 5:
                             System.out.println("Gracias por utilizar esta red social");
                             salirMenu = true;
                             input.close();
@@ -93,7 +107,8 @@ public class Menu {
                 System.out.println("4. Ver su perfil");
                 System.out.println("5. Comentar una publicacion");
                 System.out.println("6. Agregar una reaccion a una publicacion");
-                System.out.println("7. Cerrar sesion en la red social");
+                System.out.println("7. Busca dada una lista de IDs que publicaciones han sido compartida K veces");
+                System.out.println("8. Cerrar sesion en la red social");
 
                 try{
                     System.out.println("Ingrese una de las opciones anteriores: ");
@@ -134,7 +149,6 @@ public class Menu {
                             }else{
                                 controlador.share(idACompartir,listaTags);
                             }
-                            
                             break;
                         case 4: // visualize / ver perfil
                             controlador.visualize();
@@ -159,10 +173,26 @@ public class Menu {
                             String textoReaccion = input.nextLine();
                             controlador.react(idReaccion,tipoReaccion,textoReaccion);
                             break;
-                        case 7: // logout
+                            
+                        case 7: // isViral
+                            System.out.println("Ingrese la cantidad de publicaciones que desea verificar:");
+                            ArrayList<Integer> listaViral = new ArrayList<>();
+                            input.nextLine();
+                            Integer cantViral = input.nextInt();
+                            for (int i = 0; i < cantViral; i++) {
+                                System.out.println("Ingrese el ID de la publicacion numero " + (i+1));
+                                Integer idViral = input.nextInt();
+                                listaViral.add(idViral);
+                            }
+                            System.out.println("Ingrese la cantidad de compartidas minima de compartidas por publicacion");    
+                            Integer variableK = input.nextInt();
+                            controlador.isViral(listaViral,variableK);
+                            break;
+                        
+                        case 8: // logout
                             controlador.logOut();
                             break;
-
+                            
                         default:
                             System.out.println("Seleccione nuevamente una de las opciones anteriores");
                             break;

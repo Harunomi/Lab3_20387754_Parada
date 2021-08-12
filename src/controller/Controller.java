@@ -1,6 +1,5 @@
 package controller;
 import java.util.ArrayList;
-
 import model.*;
 
 public class Controller {
@@ -32,6 +31,11 @@ public class Controller {
     
     // register
 
+    /** 
+     * Registra un usuario en la red social
+     * @param username el nombre de usuario
+     * @param password la contrasena del usuario
+     */
     public void register(String username, String password){
         Socialnetwork redSocial = getSocialnetwork();
         for (int i = 0; i < redSocial.getUsuarios().size(); i++) {
@@ -45,7 +49,11 @@ public class Controller {
         redSocial.addUsuario(nuevoUsuario);
         System.out.println("Usuario registrado con exito");
     }
-
+    /** 
+     * Permite autenticar un usuario dentro de la red social
+     * @param username el nombre de usuario
+     * @param password la contrasena del usuario
+     */
     public void login(String username, String password){
         Socialnetwork redSocial = getSocialnetwork();
         for (int i = 0; i < redSocial.getUsuarios().size(); i++) {
@@ -59,13 +67,19 @@ public class Controller {
         }
         System.out.println("El usuario " + username + "no existe o la contrasena ingresada es incorrecta");
     }
-
+    /** 
+     * Desconecta a un usuario de la red social
+     */
     public void logOut(){
         Socialnetwork redSocial = getSocialnetwork();
         redSocial.setOnline(false);
 
     }
-
+    /** 
+     * Permite crear una publicacion dentro de la red social
+     * @param type el tipo de publicacion
+     * @param content el contenido como texto de la publicacion
+     */
     public void post(String type, String content){
         Socialnetwork redSocial = getSocialnetwork();
         // creamos la publicacion
@@ -79,6 +93,12 @@ public class Controller {
 
     }
 
+    /** 
+     * Permite crear una publicacion dentro de la red social, pero con etiquetados
+     * @param type el tipo de publicacion
+     * @param content el contenido como texto de la publicacion
+     * @param listaTags lista de etiquetados como string
+     */
     public void post(String type, String content,ArrayList<String> listaTags){
         Socialnetwork redSocial = getSocialnetwork();
         Integer counter = 0;
@@ -105,7 +125,10 @@ public class Controller {
         System.out.println("Post protocol completed succesfully");
 
     }
-
+    /** 
+     * Permite crear una publicacion dentro de la red social, pero con etiquetados
+     * @param username nombre de la persona a la cual deseo seguir
+     */
     public void follow(String username){
         Socialnetwork redSocial = getSocialnetwork();
         // revisamos el caso en que el usuario se quiera seguir a si mismo
@@ -124,7 +147,10 @@ public class Controller {
 
 
     }
-    // caso en que el usuario no quiera etiquetar a nadie
+    /** 
+     * permite seguir a una persona dada su id
+     * @param id id del usuario al cual deseo seguir
+     */
     public void share(Integer id){
         Socialnetwork redSocial = getSocialnetwork();
         // buscamos si la publicacion existe
@@ -144,10 +170,11 @@ public class Controller {
         }
         System.out.println("La publicacion con la ID "+id+" no fue encontrada en la red social :(");
     }
-
-    
-
-    // caso en que el usuario haya etiquetado a personas
+    /** 
+     * permite seguir a una persona dada su id
+     * @param id de la publicacion a compartir
+     * @param listaTags lista de los etiquetados
+     */
     public void share(Integer id,ArrayList<String> listaTags){
         Socialnetwork redSocial = getSocialnetwork();
         Integer counter = 0;
@@ -182,20 +209,30 @@ public class Controller {
         System.out.println("La publicacion con la ID "+id+" no fue encontrada en la red social :(");
     }
 
+    /** 
+     * muestra el contenido de la red social
+     */
     public void visualize(){
         Socialnetwork redSocial = getSocialnetwork();
         String salida = redSocial.SocialNetworkToString();
         System.out.println(salida);
     }
-
+    /** 
+     * permite realizar un comentario a una publicacion o comentario
+     * @param id de la publicacion o comentario
+     * @param texto contenido del comentario
+     */
     public void comment(Integer id, String texto){
         Socialnetwork redSocial = getSocialnetwork();
         for (int i = 0; i < redSocial.getPublicaciones().size(); i++) {
             if (redSocial.getPublicaciones().get(i).getId() == id) {
                 // los comentarios son siempre del tipo text
                 Post comentario = new Post("text", texto);
+                // modifico el autor
                 comentario.setAutor(redSocial.getUsuarioOnline());
+                // agrego el comentario a la publicacion
                 redSocial.getPublicaciones().get(i).addComment(comentario);
+                // agrego el comentario a la lista de publciaciones del usuario
                 redSocial.getUsuarioOnline().addUserPost(comentario);
                 System.out.println("\nComentario realizado con exito!");
                 return;
@@ -205,6 +242,12 @@ public class Controller {
 
     }
 
+    /** 
+     * permite agregar una reaccion a una publicacion o comentario
+     * @param id id del usuario al cual deseo seguir
+     * @param tipo tipo de reaccion que se desea realizar
+     * @param el texto adicional a la reaccion
+     */
     public void react(Integer id,String tipo, String texto){
         Socialnetwork redSocial = getSocialnetwork();
         for (int i = 0; i < redSocial.getPublicaciones().size(); i++) {
@@ -213,6 +256,72 @@ public class Controller {
                 redSocial.getPublicaciones().get(i).addReact(reaccion);
                 redSocial.addReactRS(reaccion);
                 System.out.println("Reaccion realizada con exito!");
+            }
+        }
+    }
+
+    /**
+     * de la lista de IDs dada, busca aquellas que tengan como minimio cierta cantidad de compartidas
+     * @param lista
+     * @param variableK
+     */
+    public void isViral(ArrayList<Integer> lista,Integer variableK){
+        if (lista.size() == 0) { // caso en que no se haya agregado ninguna ID
+            System.out.println("Debe ingresar al menos una ID para hacer esta funcion");
+            return;
+        }
+        Socialnetwork redSocial = getSocialnetwork();
+        ArrayList<Post> cumplen = new ArrayList<>();
+        for (int i = 0; i < lista.size(); i++) {
+            for (int j = 0; j < redSocial.getPublicaciones().size(); j++) {
+                // buscamos que la ID ingresada sea una publicacion
+                if (lista.get(i) == redSocial.getPublicaciones().get(j).getId()) {
+                    // comprobamos que cumplan con la cantidad de compartidas
+                    if (redSocial.getPublicaciones().get(j).getShared().size() >= variableK) {
+                        cumplen.add(redSocial.getPublicaciones().get(j));
+                    }
+                }
+            }
+        }
+        if (cumplen.size() == 0) {
+            System.out.println("De la lista dada, ninguna publicacion cumple con el minimo de " + variableK + " compartidas.");
+            return;
+        }else{
+            printearPost(cumplen);
+        }
+
+    }
+    /**
+     * printea en especifico una lista de publicaciones dada
+     * @param lista
+     */
+    public void printearPost(ArrayList<Post> lista){
+        for (int k = 0; k < lista.size(); k++) {
+            System.out.println("\n##### Publicacion numero" + (k+1) + " #####\n");
+            System.out.println("Publicacion creada con fecha: " + lista.get(k).getFecha() + "\n");
+            System.out.println("Tipo de publicacion: " + lista.get(k).getTipo() + "\n");
+            System.out.println("Contenido de la publicacion: " + lista.get(k).getTexto() + "\n");
+            System.out.println("La publicacion cuenta con " + lista.get(k).getReactions().size() + "\n");
+            // reacciones de la publicacion
+            for (int j = 0; j < lista.get(k).getReactions().size(); j++) {
+                System.out.println("$$$$ Reaccion numero " + (j+1) + " $$$$\n");
+                System.out.println("Fecha de la reaccion: " + lista.get(k).getReactions().get(j).getFecha() + "\n");
+                System.out.println("Autor de la reaccion: " + lista.get(k).getReactions().get(j).getAutor() + "\n");
+                System.out.println("Tipo de reaccion: " + lista.get(k).getReactions().get(j).getTipo() + "\n");
+                System.out.println("Contenido de la reaccion: " + lista.get(k).getReactions().get(j).getContenido() + "\n");            
+            }
+            System.out.println("La publicacion actual tiene " + lista.get(k).getComments().size() + " comentarios\n");
+            // comentarios de la publicacion
+            for (int j = 0; j < lista.get(k).getComments().size(); j++) {
+                System.out.println("     ^^^ Comentario numero " + (j+1)+ " ^^^\n");
+                System.out.println("Fecha de creacion del comentario: " + lista.get(k).getComments().get(j).getFecha() + "\n");
+                System.out.println("Autor del comentario: " + lista.get(k).getComments().get(j).getAutor().getUsername() + "\n");
+                System.out.println("Tipo de comentario: " + lista.get(k).getComments().get(j).getTipo() + "\n");
+                System.out.println("Contenido del comentario: " + lista.get(k).getComments().get(j).getTexto() + "\n");
+                System.out.println("El comentario cuenta con otros: " + lista.get(k).getComments().get(j).getComments().size() + " comentarios\n");
+                System.out.println("El comentario tiene: " + lista.get(k).getComments().get(j).getReactions().size() + " reacciones\n");
+                System.out.println("El comentario tiene: " + lista.get(k).getComments().get(j).getTags().size() + " etiquetados\n");
+                System.out.println("Ha sido compartido: " + lista.get(k).getComments().get(j).getShared().size() + " veces\n");
             }
         }
     }

@@ -117,30 +117,24 @@ public class User {
     
     
     // --------------------methods-----------------------
+    /**
+     * agrega un seguidor a la lista de seguidores
+     * @param follower
+     */
     public void addFollowers(User follower){
         ArrayList<User> list = getFollowers();
         list.add(follower);
         setFollowers(list);
     }
-
+    /**
+     * Agrega una publicacion a la lista de publicaciones del usuario
+     * @param publicacion
+     */
     public void addUserPost(Post publicacion){
         ArrayList<Post> list = getPublicaciones();
         list.add(publicacion);
         setPublicaciones(list);
 
     }
-    /*
-    public User id_to_user(ArrayList<User> usuarios, Integer id){
-        User retorno;
-        for (int i = 0; i < usuarios.size(); i++) {
-            if(usuarios.get(i).getId() == id){
-                retorno = usuarios.get(i);
-                return retorno;
-            }
-        }
-        System.out.print("El usuario con esta id no existe");
-        return;
-
-    }*/
 
 }

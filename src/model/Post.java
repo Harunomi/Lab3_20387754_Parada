@@ -182,30 +182,44 @@ public class Post {
     }
 
     // methods
+    /**
+     * agrega una reaccion
+     * @param reaccion
+     */
     public void addReact(React reaccion){
         ArrayList<React> list = getReactions();
         list.add(reaccion);
         setReactions(list);
     }
-
+    /**
+     * agrega un comentario
+     * @param comentario
+     */
     public void addComment(Post comentario){
         ArrayList<Post> list = getComments();
         list.add(comentario);
         setComments(list);
     }
-
+    /**
+     * agrega un etiquetado 
+     * @param etiquetado
+     */
     public void addTag(String etiquetado){
         ArrayList<String> list = getTags();
         list.add(etiquetado);
         setTags(list);
         
     }
-
+    /**
+     * agrega un usuario a la lista de compartidos
+     * @param compartido
+     */
     public void addShared(User compartido){
         ArrayList<User> list = getShared();
         list.add(compartido);
         setShared(list);
     }
 
-    
+       
+
 }

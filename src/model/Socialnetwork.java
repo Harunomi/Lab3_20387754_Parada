@@ -173,33 +173,38 @@ public class Socialnetwork {
     }
 
     // methods
+    /**
+     * agrega un usuario a la lista de usuarios
+     * @param usuario
+     */
     public void addUsuario(User usuario){
         ArrayList<User> list = getUsuarios();
         list.add(usuario);
         setUsuarios(list);
         
     }
-    
+    /**
+     * agrega una publicacion a la lista de publicaciones 
+     * @param publicacion
+     */
     public void addPostRS(Post publicacion){
         ArrayList<Post> list = getPublicaciones();
         list.add(publicacion);
         setPublicaciones(list);
     }
-
+    /**
+     * agrega una reaccion a la lista de reacciones
+     * @param reaccion
+     */
     public void addReactRS(React reaccion){
         ArrayList<React> list = getReacts();
         list.add(reaccion);
         setReacts(list);
     }
-
-    public void actualizarPublicaciones(Post entrada){
-        for (int i = 0; i < getPublicaciones().size(); i++) {
-            if (getPublicaciones().get(i).getId() == entrada.getId()) {
-                this.publicaciones.set(i,entrada);
-            }
-        }
-    }
-
+    /**
+     * 
+     * @return un string con todo lo relacionado a la red social o al usuario conectado
+     */
     public String SocialNetworkToString(){
         String retorno = new String();
         retorno = "Nombre de la red social: " + getNombre() + "\n";
