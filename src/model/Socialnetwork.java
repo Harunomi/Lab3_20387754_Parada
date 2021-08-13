@@ -31,31 +31,60 @@ public class Socialnetwork {
         User user2 = new User("Harunomi","password1");
         User user3 = new User("Spica","Cybele");
         User user4 = new User("uNable","nomehackeen");
+        User user5 = new User("Kappita","1234");
 
         // creo las publicaciones
         Post post1 = new Post("text","Explorando la nueva red social");
         Post post2 = new Post("photo","publicacion.jpeg");
         Post post3 = new Post("audio","cover.mp3");
         Post post4 = new Post("photo","tremendomapita.png");
+        Post post5 = new Post("audio","song.mp3");
+        Post post6 = new Post("text","Como se ocupa esta red social LOL");
+        Post post7 = new Post("text","termine de jugar, luego de 10 horas");
+        Post post8 = new Post("text","es dificil soportar el stress");
+        Post post9 = new Post("text","chicos manana se prende stream");
+        Post post10 = new Post("photo","papitasfritas.png");
+        
+
 
         // agrego las publicaciones a los usuarios
         user2.addUserPost(post1);
         user2.addUserPost(post2);
         user1.addUserPost(post3);
         user4.addUserPost(post4);
+        user4.addUserPost(post10);
+        user1.addUserPost(post5);
+        user1.addUserPost(post9);
+        user3.addUserPost(post6);
+        user5.addUserPost(post7);
+        user2.addUserPost(post8);
 
         // agrego los usuarios y publicacion a la red social
         usuarios.add(user1);
         usuarios.add(user2);
         usuarios.add(user3);
         usuarios.add(user4);
+        usuarios.add(user5);
 
+        // agrego las publicaciones a la red social 
         publicaciones.add(post1);
         publicaciones.add(post2);
         publicaciones.add(post3);
         publicaciones.add(post4);
+        publicaciones.add(post5);
+        publicaciones.add(post6);
+        publicaciones.add(post7);
+        publicaciones.add(post8);
+        publicaciones.add(post9);
+        publicaciones.add(post10);
 
+        // agrego un par de followers
 
+        user2.addFollowers(user1);
+        user2.addFollowers(user3);
+        user1.addFollowers(user2);
+        user5.addFollowers(user2);
+        
     }
     // getters y setters
 
@@ -264,11 +293,11 @@ public class Socialnetwork {
             // comenzando con los usuarios
             retorno = retorno + "*---------Usuarios de la red social----------*\n\n";
             for (int k = 0; k < getUsuarios().size(); k++) {
-                retorno = retorno + "Usuario online actualmente: " + getUsuarios().get(k).getUsername() + "\n";
+                retorno = retorno + "\n\nNombre de usuario: " + getUsuarios().get(k).getUsername() + "\n";
                 retorno = retorno + "Cuenta creada con la fecha de: " + getUsuarios().get(k).getFecha() + "\n";
                 retorno = retorno + "El usuario " + getUsuarios().get(k).getUsername() + " cuenta con " + getUsuarios().get(k).getFollowers().size() + " followers, los cuales son:";
                 for (int i = 0; i < getUsuarios().get(k).getFollowers().size(); i++) {
-                    retorno = retorno + "\n   " + getUsuarios().get(k).getFollowers().get(i);
+                    retorno = retorno + "\n   " + getUsuarios().get(k).getFollowers().get(i).getUsername();
                 }
                 retorno = retorno + "\n";
                 retorno = retorno + "El usuario cuenta con " + getUsuarios().get(k).getPublicaciones().size() + " publicaciones, las cuales son:";

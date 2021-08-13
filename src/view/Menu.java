@@ -36,7 +36,7 @@ public class Menu {
         Controller controlador = getControlador();
         while(!salirMenu){
             if(controlador.estaConectado() == false){
-                System.out.println("### Bienvenido a Tik Tok ###");
+                System.out.println("### Bienvenido a LMAOBOOK ###");
                 System.out.println("Escoja la opcion que desea realizar: ");
                 System.out.println("1. LOGEARSE");
                 System.out.println("2. REGISTRARSE");
@@ -98,7 +98,7 @@ public class Menu {
                     input.next();
                 }
             }else{
-                System.out.println("****Bienvenido a Tik Tok******");
+                System.out.println("****Bienvenido a LMAOBOOK******");
                 // agregar el nombre de usuario con el cual te registraste
                 System.out.println("Escoje una accion a realizar");
                 System.out.println("1. Realizar una publicacion");

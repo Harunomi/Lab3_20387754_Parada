@@ -65,7 +65,7 @@ public class Controller {
                 return;
             }
         }
-        System.out.println("El usuario " + username + "no existe o la contrasena ingresada es incorrecta");
+        System.out.println("El usuario " + username + " no existe o la contrasena ingresada es incorrecta");
     }
     /** 
      * Desconecta a un usuario de la red social
